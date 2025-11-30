@@ -61,11 +61,3 @@ No advanced safety, governance or logging yet – those will be added later,
 in line with the overall CollectiVAI philosophy.
 
 ---
-
-## 🚀 Quickstart
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/collectiv-ai/collectiv-ai-router.git
-cd collectiv-ai-router
