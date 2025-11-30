@@ -1,1 +1,1 @@
-
+"""CollectiVAI Router package."""
