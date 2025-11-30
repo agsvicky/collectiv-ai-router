@@ -1,63 +1,48 @@
 <p align="center">
-  <img src="logo.png" alt="CollectiVAI Logo" width="400" />
+  <img src="logo.png" alt="CollectiVAI Logo" width="360" />
 </p>
 
 <h1 align="center">CollectiVAI Router</h1>
-<h3 align="center">Multi-Provider AI Routing · Prototype v0.1</h3>
+<h3 align="center">Human-centred AI routing backend for the CollectiVAI App</h3>
 
 <p align="center">
-  <a href="https://collectivai.org">
-    <img src="https://img.shields.io/badge/Website-collectivai.org-003399?style=flat" alt="Website" />
-  </a>
-  <a href="https://github.com/collectiv-ai/collectiv-ai-app">
-    <img src="https://img.shields.io/badge/App-Alpha-ffcc00?style=flat" alt="App Alpha" />
-  </a>
-  <a href="https://github.com/collectiv-ai/collectiv-ai-app-chain">
-    <img src="https://img.shields.io/badge/Chain-Pre--Alpha-999999?style=flat" alt="Chain Pre-Alpha" />
-  </a>
-  <img src="https://img.shields.io/badge/Router-Prototype%20v0.1-003399?style=flat" alt="Router Prototype" />
+  <img src="https://img.shields.io/badge/Project-CollectiVAI-003399?style=flat" alt="CollectiVAI" />
+  <img src="https://img.shields.io/badge/Status-Prototype-ffcc00?style=flat" alt="Prototype" />
   <img src="https://img.shields.io/badge/Made%20in-Europe-003399?style=flat" alt="Made in Europe" />
 </p>
 
 ---
 
-> ⚠️ **Status:** Early experimental prototype · Not production-ready  
-> This router is part of the technical heart of CollectiVAI and will evolve over time.
+## 🧠 What is this?
+
+The **CollectiVAI Router** is the backend for the **CollectiVAI App** (iOS / iPadOS / macOS).
+
+It receives structured requests from the app – including:
+
+- selected **provider** (OpenAI, Gemini, Mistral, Meta, DeepSeek, Auto)  
+- **mode** (Ethical / Research / Technical)  
+- **topic** (Democracy, Climate, Economy, Security, Research, Health)  
+- **service profile** (Cities, Universities, NGOs, Citizens, Startups)  
+- optional **model ID**
+
+and returns:
+
+- the **final answer text**  
+- which **provider/model** was actually used  
+- **routing meta data** for the live monitoring sidebar (latency, filters, reason)
+
+The idea:  
+> You keep **full control** of your API keys and routing logic on the server side,  
+> while the CollectiVAI App stays clean, minimal and privacy-friendly.
 
 ---
 
-## 🌐 What is the CollectiVAI Router?
+## 🧩 Relation to the CollectiVAI App
 
-The **CollectiVAI Router** is a small, experimental backend that:
+The SwiftUI app (CollectiVAI) talks to a single HTTP endpoint:
 
-- accepts a chat request via a simple HTTP API (`/v1/chat`),
-- routes it to one of several AI backends (e.g. OpenAI, local Ollama),
-- applies basic routing rules & metadata,
-- and returns a unified response format.
-
-It is meant as the **technical core** behind the CollectiVAI App and future
-infrastructure – a place where:
-
-- **multi-provider routing**,
-- **privacy modes** and
-- **ethical / safety layers**
-
-can gradually be implemented and tested.
-
----
-
-## 🧩 Current Scope (v0.1 – Prototype)
-
-This first public version focuses on:
-
-- a very small, understandable Python / FastAPI codebase
-- simple `/v1/chat` endpoint
-- two provider backends (example):
-  - `openai` (cloud)
-  - `ollama` (local, running on the same machine)
-- basic routing parameter: `provider` (`auto`, `openai`, `ollama`)
-
-No advanced safety, governance or logging yet – those will be added later,
-in line with the overall CollectiVAI philosophy.
-
----
+```swift
+struct CollectivAIBackend {
+    static let endpoint = URL(string: "https://collectivai-server.collectivai.workers.dev/api/chat")!
+    // ...
+}
