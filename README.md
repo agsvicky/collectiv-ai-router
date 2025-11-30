@@ -32,6 +32,6 @@ decides **which AI backend to call**, and returns:
 In simple terms:
 
 ```text
-CollectiVAI App  →  CollectiVAI Router  →  AI Providers (OpenAI, Gemini, Mistral, Meta, DeepSeek, local…)
+CollectiVAI App  →  CollectiVAI Router  →  AI Providers
            ↑                                 ↓
-        Modes, topics, profiles          Reply + routingInfo
+     Modes, topics, profiles            Reply + routingInfo
