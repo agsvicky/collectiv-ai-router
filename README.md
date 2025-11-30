@@ -1,81 +1,72 @@
 <p align="center">
-  <img src="logo.png" alt="CollectiVAI Logo" width="380" />
+  <img src="logo.png" alt="CollectiVAI Logo" width="320" />
 </p>
 
 <h1 align="center">CollectiVAI Router</h1>
-<h3 align="center">Human-Centered AI Routing Layer for the CollectiVAI App</h3>
+<h3 align="center">Multi-Provider AI Routing · Backend für die CollectiVAI App</h3>
 
 <p align="center">
   <a href="https://collectivai.org">
     <img src="https://img.shields.io/badge/Website-collectivai.org-003399?style=flat" alt="Website" />
   </a>
   <a href="https://github.com/collectiv-ai/collectiv-ai-app">
-    <img src="https://img.shields.io/badge/App-Prototype-ffcc00?style=flat" alt="CollectiVAI App" />
+    <img src="https://img.shields.io/badge/App-iOS·iPadOS·macOS-ffcc00?style=flat" alt="CollectiVAI App" />
   </a>
-  <img src="https://img.shields.io/badge/Layer-Router-003399?style=flat" alt="Router Layer" />
-  <img src="https://img.shields.io/badge/Status-Early%20Design-999999?style=flat" alt="Status" />
+  <img src="https://img.shields.io/badge/Made%20in-Europe-003399?style=flat" alt="Made in Europe" />
 </p>
 
 ---
 
-> 🇬🇧 This repository documents the **routing layer** used by the  
-> **CollectiVAI App** (iOS / iPadOS / macOS).  
->
-> 🇩🇪 Dieses Repository beschreibt die **Routing-Schicht**,  
-> die von der **CollectiVAI-App** genutzt wird.
+> ⚠️ **Status:** Frühes Experiment / Prototyp (v0.1)  
+> Backend-Router für die CollectiVAI App – **nicht produktiv einsetzen**.
 
 ---
 
-## 1. What is the CollectiVAI Router?
+## 🧠 Was ist der CollectiVAI Router?
 
-The **CollectiVAI Router** is the backend layer behind the CollectiVAI app’s chat experience.
+Der **CollectiVAI Router** ist ein kleines Backend, das als „Gehirn“ hinter der  
+**CollectiVAI App** läuft:
 
-Instead of talking directly to one model, the app sends every request to **one router endpoint**.  
-The router then decides:
+- nimmt Chat-Anfragen von der App entgegen  
+- routet sie an unterschiedliche AI-Provider (OpenAI, Gemini, Mistral, Meta, DeepSeek, lokale Modelle …)  
+- berücksichtigt **Mode, Topic, Service-Profil und Modellwahl**  
+- gibt eine **einheitliche Antwort** inkl. Routing-Meta-Infos zurück
 
-- **which provider** to use  
-  (`OpenAI`, `Gemini`, `Mistral`, `Meta`, `DeepSeek`, or **Auto**)
-- **which model** to call for that provider  
-- **how to apply safety & ethics filters** based on:
-  - **Mode** (ethical / research / technical)
-  - **Topic** (democracy, climate, economy, security, research, health)
-  - **Service profile** (city services, universities, NGOs, citizen advisor, startups)
-
-The router is designed as a **human-centered control layer**:
-you can swap providers or keys on the backend without changing the app.
+Die iOS / iPadOS / macOS-App spricht den Router über eine einfache HTTP-API an.  
+In der App ist das als `CollectivAIBackend.send(…)` implementiert.
 
 ---
 
-## 2. Relationship to the CollectiVAI App
+## 🧩 Aktuelle Rolle im CollectiVAI Ökosystem
 
-The SwiftUI app talks to a single HTTP endpoint using this struct:
+- **Frontend:**  
+  CollectiVAI SwiftUI-App mit:
+  - Provider-Auswahl (Auto, OpenAI, Gemini, Mistral, Meta, DeepSeek)  
+  - Modes (`Ethical`, `Research`, `Technical`)  
+  - Topics (Democracy, Climate, Security, …)  
+  - Civic Service Profiles (City, Universities, NGOs, Citizens, Startups)  
+  - Civics-Tabs: **Chat · Contracts · Chain · Settings**
 
-```swift
-struct CollectivAIBackend {
-    static let endpoint =
-      URL(string: "https://collectivai-server.collectivai.workers.dev/api/chat")!
+- **Backend:**  
+  Dieser Router:
 
-    struct ChatRequest: Encodable {
-        let prompt: String
-        let mode: String
-        let provider: String
-        let topic: String
-        let modelId: String?
-        let serviceProfile: String?
-    }
+  - nimmt strukturierte Requests der App entgegen  
+  - entscheidet, **welches Modell** tatsächlich verwendet wird  
+  - kann ein **Ethik- / Privacy-Overlay** implementieren  
+  - liefert Routing-Infos zurück (Provider, Modell, Latenz, Filter, Reason)
 
-    struct RoutingInfo: Decodable {
-        let reason: String?
-        let filters: [String]?
-        let latencyMs: Int?
-    }
+- **Provider-Ebene (später):**
+  - OpenAI, Google Gemini, Mistral, Meta, DeepSeek, lokale Modelle (Ollama, etc.)  
+  - zusätzliche Layer für Governance, Logging, Safety, EU-Compliance
 
-    struct ChatResponse: Decodable {
-        let reply: String
-        let providerUsed: String
-        let model: String
-        let routingInfo: RoutingInfo?
-    }
+---
 
-    // ...
-}
+## 🔌 API-Vertrag (wie die App mit dem Router spricht)
+
+### Endpoint
+
+Der Router stellt (lokal oder im Netz) z. B. einen Endpoint bereit:
+
+```text
+POST /api/chat
+Content-Type: application/json
