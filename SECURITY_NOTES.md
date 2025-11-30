@@ -25,6 +25,9 @@ If you accidentally pushed a real `.env` file to a public repo:
   - provider / model
   - latency and status
 - If logs contain user data, treat them as confidential and store them securely.
+- If you operate this router in the EU or process EU citizen data, you must
+  ensure compliance with GDPR (data minimisation, retention limits, right to
+  erasure, etc.).
 
 ## 3. CORS & origins
 
@@ -44,13 +47,26 @@ These are not included in this minimal reference implementation.
 
 ## 5. Custom providers
 
-The `Custom` provider is a **placeholder**.  
+The `custom` provider is a **placeholder**.  
 Only enable/implement it if you:
 
 - control the target backend, and
 - understand the security, logging and privacy implications.
 
-By default, the example implementation simply returns an error if selected.
+By default, the example implementation returns a clear error  
+(e.g. `"Custom provider is not configured in this public demo."`)  
+if it is selected.
+
+## 6. Transport security & authentication
+
+- Always deploy the router **behind HTTPS** (e.g. via Cloudflare, Nginx, Traefik).
+- The reference implementation does **not** include authentication or API keys.
+  In production you should:
+  - protect the router with authentication (e.g. JWT, API key, OAuth, mTLS), or
+  - **restrict access** to trusted networks / IP ranges only.
+- Never expose a development or demo deployment directly to the public internet
+  without proper access control.
 
 ---
+
 © 2025 CollectiVAI – This file is non-confidential documentation.
